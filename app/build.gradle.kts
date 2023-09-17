@@ -66,4 +66,7 @@ dependencies {
 
     //image
     implementation("com.github.bumptech.glide:glide:4.14.2")
+
+    //tools
+    implementation("com.github.marlonlom:timeago:4.0.3")
 }

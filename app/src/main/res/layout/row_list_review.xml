@@ -34,41 +34,57 @@
         app:layout_constraintTop_toTopOf="@+id/ivAvatar"
         tools:text="Author Username" />
 
-    <TextView
-        android:id="@+id/tvDate"
+    <LinearLayout
+        android:id="@+id/llRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/tvRating"
-        app:layout_constraintStart_toEndOf="@+id/tvRating"
-        app:layout_constraintTop_toTopOf="@+id/tvRating"
-        tools:text="1 hour ago" />
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="@+id/ivAvatar"
+        app:layout_constraintTop_toBottomOf="@id/ivAvatar">
+
+        <ImageView
+            android:id="@+id/ivStar"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/i_star"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="55dp" />
+
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="54dp"
+            tools:text="8.5" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white70"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="54dp"
+            tools:text="1 hour ago" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tvOverview"
+        android:id="@+id/tvReview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvRating"
-        app:layout_constraintTop_toBottomOf="@+id/tvRating"
-        tools:text="Long overview" />
-
-    <TextView
-        android:id="@+id/tvRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/ivAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
-        tools:text="8.5" />
+        app:layout_constraintStart_toStartOf="@+id/llRating"
+        app:layout_constraintTop_toBottomOf="@+id/llRating"
+        tools:text="Long review" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
