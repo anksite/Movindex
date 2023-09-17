@@ -54,7 +54,7 @@ class ResultCall<T>(val delegate: Call<T>) :
                     val errorMessage = when (t) {
 //                        is IOException -> "No internet connection"
 //                        is HttpException -> "Something went wrong!"
-                        else -> t.localizedMessage
+                        else -> t.message
                     }
                     callback.onResponse(
                         this@ResultCall,

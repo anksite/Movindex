@@ -12,7 +12,7 @@ data class ResponseMovie(
     @SerializedName("runtime") val runtime: Int,
     @SerializedName("tagline") val tagline: String,
     @SerializedName("title") val title: String,
-    @SerializedName("vote_average") val voteAverage: Float,
+    @SerializedName("vote_average") val voteAverage: String,
     @SerializedName("vote_count") val voteCount: Int,
 )
 

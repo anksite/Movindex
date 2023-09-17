@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:selectableItemBackground"
-    android:orientation="vertical">
+    android:id="@+id/clParent"
+    android:background="?android:selectableItemBackground">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvTitle"

@@ -26,10 +26,10 @@ class RecyclerDiscover(
 
     override fun onBindViewHolder(holder: ViewHolderHuruf, position: Int) {
         val dataMovie = listMovie[position]
-        Glide.with(mContext).load("https://image.tmdb.org/t/p/w154"+dataMovie.poster_path).into(holder.binding.ivPoster)
+        Glide.with(mContext).load("https://image.tmdb.org/t/p/w185"+dataMovie.poster_path).into(holder.binding.ivPoster)
         holder.binding.tvTitle.text = dataMovie.title
 
-        holder.binding.root.setOnClickListener { onClickMovie(dataMovie) }
+        holder.binding.clParent.setOnClickListener { onClickMovie(dataMovie) }
     }
 
     class ViewHolderHuruf(b: RowListDiscoverBinding) : RecyclerView.ViewHolder(b.root) {

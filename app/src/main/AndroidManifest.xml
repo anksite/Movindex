@@ -27,6 +27,7 @@
 
         <activity
             android:name=".detail.ActivityDetail"
+            android:parentActivityName=".discover.ActivityDiscover"
             android:exported="false" />
 
     </application>

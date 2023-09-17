@@ -1,20 +1,21 @@
 package com.anksite.movindex.detail
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anksite.movindex.Cons
 import com.anksite.movindex.DialogCustom
 import com.anksite.movindex.DialogLoading
-import com.anksite.movindex.R
 import com.anksite.movindex.api.model.ResponseMovie
 import com.anksite.movindex.api.model.ResponseReview
 import com.anksite.movindex.api.model.ResponseVideo
 import com.anksite.movindex.databinding.ActivityDetailBinding
-import com.anksite.movindex.databinding.ActivityDiscoverBinding
-import com.anksite.movindex.discover.VMDiscover
 import com.bumptech.glide.Glide
+
 
 class ActivityDetail : AppCompatActivity() {
 
@@ -27,6 +28,7 @@ class ActivityDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(b.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mDialogLoading.show()
         vmDetail.responseMovie.observe(this, ::handleMovie)
@@ -39,29 +41,55 @@ class ActivityDetail : AppCompatActivity() {
             vmDetail.video(it)
             vmDetail.reviews(it)
         }
+
+        b.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     fun handleMovie(responseMovie: ResponseMovie) {
         responseCount()
-        Glide.with(this).load("https://image.tmdb.org/t/p/w780"+responseMovie.backdropPath).into(b.ivBackdrop)
+        b.toolbar.title = responseMovie.title
+        b.tvSubtitle.text = responseMovie.tagline
+        Glide.with(this).load("https://image.tmdb.org/t/p/w780" + responseMovie.backdropPath)
+            .into(b.ivBackdrop)
         b.tvRuntime.text = responseMovie.runtime.toString()
         b.tvGenres.text = responseMovie.genres.toString()
         b.tvVoteAvg.text = responseMovie.voteAverage.toString()
         b.tvVoteCount.text = responseMovie.voteCount.toString()
         b.tvReleaseDate.text = responseMovie.releaseDate
-        b.tvTitle.text = responseMovie.title
-        b.tvTagline.text = responseMovie.tagline
         b.tvOverview.text = responseMovie.overview
     }
 
     fun handleVideo(responseVideo: ResponseVideo) {
         responseCount()
-        b.rvTrailer
+
+        val mAdapter = RecyclerTrailer(responseVideo.results) { videoId ->
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://www.youtube.com/watch?v=$videoId")
+                )
+            )
+        }
+
+        b.rvTrailer.apply {
+            layoutManager = LinearLayoutManager(
+                this@ActivityDetail,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = mAdapter
+        }
     }
 
     fun handleReview(responseReview: ResponseReview) {
         responseCount()
-        b.rvReview
+        val mAdapter = RecyclerReview(responseReview.results)
+        b.rvReview.apply {
+            layoutManager = LinearLayoutManager(this@ActivityDetail)
+            adapter = mAdapter
+        }
     }
 
     fun onError(response: String) {
@@ -72,9 +100,9 @@ class ActivityDetail : AppCompatActivity() {
             .show()
     }
 
-    fun responseCount(){
+    fun responseCount() {
         ++mResponseCount
-        if(mResponseCount==3){
+        if (mResponseCount == 3) {
             mDialogLoading.cancel()
         }
     }

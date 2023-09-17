@@ -1,124 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
+    android:fitsSystemWindows="true"
     tools:context=".detail.ActivityDetail">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/ivBackdrop"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="centerCrop" />
+            app:collapsedTitleTextColor="@color/white"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginBottom="32dp"
+            app:expandedTitleTextColor="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:toolbarId="@id/toolbar">
 
-        <TextView
-            android:id="@+id/tvRuntime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="1h 25min"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax">
 
-        <TextView
-            android:id="@+id/tvGenres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="Action | Comedy | Fantasy"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
+                <ImageView
+                    android:id="@+id/ivBackdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
 
-        <TextView
-            android:id="@+id/tvVoteAvg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="7.8"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_black" />
+            </FrameLayout>
 
-        <TextView
-            android:id="@+id/tvVoteCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="320 vote"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                app:layout_collapseMode="parallax"
+                tools:text="Subtitle" />
 
-        <TextView
-            android:id="@+id/tvReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="September 17, 2023"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="Movie Title"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAppearance="?android:textAppearanceLarge" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/i_back"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        <TextView
-            android:id="@+id/tvTagline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="This is a movie tagline"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <TextView
-            android:id="@+id/tvOverview"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="Long Overview"
-            android:textColor="@color/white"
-            android:textAppearance="?android:textAppearanceMedium" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="Trailer"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAppearance="?android:textAppearanceMedium" />
+            <TextView
+                android:id="@+id/tvRuntime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="1h 25min" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTrailer"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            <TextView
+                android:id="@+id/tvGenres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="Action | Comedy | Fantasy" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            tools:text="Review"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAppearance="?android:textAppearanceMedium" />
+            <TextView
+                android:id="@+id/tvVoteAvg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="7.8" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvReview"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvVoteCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="320 vote" />
 
-</ScrollView>
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="September 17, 2023" />
 
+            <TextView
+                android:id="@+id/tvOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="Long Overview" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Trailer"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrailer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Review"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
