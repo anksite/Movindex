@@ -1,10 +1,11 @@
-package com.anksite.movindex
+package com.anksite.movindex.util
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Window
+import com.anksite.movindex.R
 
 class DialogLoading(val context: Context) {
     val mDialog = Dialog(context).apply {

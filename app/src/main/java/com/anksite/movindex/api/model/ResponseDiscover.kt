@@ -13,6 +13,3 @@ data class Movie(
     @SerializedName("poster_path") val poster_path: String,
     @SerializedName("title") val title: String
 )
-
-
-

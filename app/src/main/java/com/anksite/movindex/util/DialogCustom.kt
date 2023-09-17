@@ -1,4 +1,4 @@
-package com.anksite.movindex
+package com.anksite.movindex.util
 
 import android.app.Activity
 import android.app.Dialog
@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.anksite.movindex.R
 
 class DialogCustom(val context: Context) {
     var onClickPositive: (() -> Unit)? = null

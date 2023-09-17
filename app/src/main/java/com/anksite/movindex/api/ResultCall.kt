@@ -1,14 +1,11 @@
 package com.anksite.movindex.api
 
-import android.util.Log
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
-import java.io.IOException
-import java.lang.RuntimeException
 
 class ResultCall<T>(val delegate: Call<T>) :
     Call<Result<T>> {

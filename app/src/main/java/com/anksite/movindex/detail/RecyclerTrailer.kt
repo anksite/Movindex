@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anksite.movindex.R
-import com.anksite.movindex.ToolBatch
 import com.anksite.movindex.api.model.Video
 import com.anksite.movindex.databinding.RowListTrailerBinding
+import com.anksite.movindex.util.ToolBatch
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class RecyclerTrailer(
     private val listTrailer: List<Video>,

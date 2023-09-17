@@ -19,5 +19,3 @@ data class AuthorDetails(
     @SerializedName("avatar_path") val avatar_path: String,
     @SerializedName("rating") val rating: String,
 )
-
-

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anksite.movindex.api.ApiUtils
-import com.anksite.movindex.api.model.ResponseDiscover
 import com.anksite.movindex.api.model.ResponseMovie
 import com.anksite.movindex.api.model.ResponseReview
 import com.anksite.movindex.api.model.ResponseVideo

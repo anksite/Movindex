@@ -1,20 +1,18 @@
 package com.anksite.movindex.discover
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.anksite.movindex.detail.ActivityDetail
-import com.anksite.movindex.Cons
-import com.anksite.movindex.DialogCustom
-import com.anksite.movindex.DialogLoading
 import com.anksite.movindex.api.model.Movie
 import com.anksite.movindex.api.model.ResponseDiscover
 import com.anksite.movindex.databinding.ActivityDiscoverBinding
+import com.anksite.movindex.detail.ActivityDetail
+import com.anksite.movindex.util.Cons
+import com.anksite.movindex.util.DialogCustom
+import com.anksite.movindex.util.DialogLoading
 
 class ActivityDiscover : AppCompatActivity() {
 

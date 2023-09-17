@@ -1,7 +1,7 @@
 package com.anksite.movindex.api
 
 import com.anksite.movindex.BuildConfig
-import com.anksite.movindex.Cons
+import com.anksite.movindex.util.Cons
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

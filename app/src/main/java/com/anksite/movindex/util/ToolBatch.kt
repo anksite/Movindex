@@ -1,4 +1,4 @@
-package com.anksite.movindex
+package com.anksite.movindex.util
 
 import java.text.SimpleDateFormat
 import java.util.Locale

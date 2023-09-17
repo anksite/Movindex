@@ -7,16 +7,16 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.anksite.movindex.Cons
-import com.anksite.movindex.DialogCustom
-import com.anksite.movindex.DialogLoading
 import com.anksite.movindex.R
-import com.anksite.movindex.ToolBatch
 import com.anksite.movindex.api.model.Genre
 import com.anksite.movindex.api.model.ResponseMovie
 import com.anksite.movindex.api.model.ResponseReview
 import com.anksite.movindex.api.model.ResponseVideo
 import com.anksite.movindex.databinding.ActivityDetailBinding
+import com.anksite.movindex.util.Cons
+import com.anksite.movindex.util.DialogCustom
+import com.anksite.movindex.util.DialogLoading
+import com.anksite.movindex.util.ToolBatch
 import com.bumptech.glide.Glide
 
 
