@@ -12,14 +12,29 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
-        <ProgressBar
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:indeterminateOnly="true"
-            android:padding="12dp"
-            android:scaleY="4" />
+            android:layout_height="100dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="14dp"
+                android:src="@drawable/movindex_dark"/>
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:indeterminateOnly="true"
+                android:padding="12dp"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorForeground"
+                android:scaleY="4" />
+        </RelativeLayout>
+
+
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

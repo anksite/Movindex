@@ -52,8 +52,9 @@ class ActivityDiscover : AppCompatActivity() {
 
     fun onError(response: String) {
         mDialogLoading.cancel()
+        b.pbLoading.visibility = View.GONE
         DialogCustom(this)
-            .setMessage("Error!")
+            .setTitle("Error!")
             .setMessage(response)
             .show()
     }

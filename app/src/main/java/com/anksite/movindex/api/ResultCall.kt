@@ -18,22 +18,12 @@ class ResultCall<T>(val delegate: Call<T>) :
         delegate.enqueue(
             object : Callback<T> {
                 override fun onResponse(call: Call<T>, response: Response<T>) {
-                    Log.d(TAG, response.body().toString())
                     if (response.isSuccessful) {
-                        if(response.code()==204){
-                            //Catch delete response
-                            callback.onResponse(
-                                this@ResultCall,
-                                Response.success(Result.failure(RuntimeException("204")))
+                        callback.onResponse(
+                            this@ResultCall, Response.success(
+                                response.code(), Result.success(response.body()!!)
                             )
-                        } else {
-                            callback.onResponse(
-                                this@ResultCall, Response.success(
-                                    response.code(), Result.success(response.body()!!)
-                                )
-                            )
-                        }
-
+                        )
                     } else {
                         val errorBody = response.errorBody()?.string()
                         if (errorBody.isNullOrEmpty()) {
@@ -53,11 +43,14 @@ class ResultCall<T>(val delegate: Call<T>) :
 
 
                 override fun onFailure(call: Call<T>, t: Throwable) {
-                    val errorMessage = when (t) {
-//                        is IOException -> "No internet connection"
-//                        is HttpException -> "Something went wrong!"
-                        else -> t.message
+                    var errorMessage = "No message!"
+
+                    if(t.message!!.contains("Unable to resolve host")){
+                        errorMessage = "Check your network connection!"
+                    } else {
+                        errorMessage = t.message!!
                     }
+
                     callback.onResponse(
                         this@ResultCall,
                         Response.success(Result.failure(RuntimeException(errorMessage, t)))

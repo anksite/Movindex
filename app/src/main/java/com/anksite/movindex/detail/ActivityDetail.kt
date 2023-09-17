@@ -112,8 +112,10 @@ class ActivityDetail : AppCompatActivity() {
     fun onError(response: String) {
         responseCount()
         DialogCustom(this)
-            .setMessage("Error!")
+            .setTitle("Error!")
             .setMessage(response)
+            .setCancelable(false)
+            .setOnPositiveListener { finish() }
             .show()
     }
 

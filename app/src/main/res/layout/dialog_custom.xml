@@ -23,7 +23,7 @@
                 android:layout_height="150dp"
                 android:padding="16dp"
                 android:background="@color/colorPrimary"
-                android:src="@drawable/dialog_error"/>
+                android:src="@drawable/i_error"/>
 
             <TextView
                 android:id="@+id/tv_title"
