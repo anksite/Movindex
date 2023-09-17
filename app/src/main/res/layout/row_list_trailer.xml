@@ -34,7 +34,6 @@
         android:layout_marginHorizontal="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:paddingHorizontal="8dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         tools:text="Title\nTitle" />
@@ -47,7 +46,6 @@
         android:layout_marginBottom="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:paddingHorizontal="8dp"
         android:textColor="@color/white"
         tools:text="September 17, 2023" />
 

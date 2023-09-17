@@ -4,9 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.anksite.movindex.ToolBatch
 import com.anksite.movindex.api.model.Video
 import com.anksite.movindex.databinding.RowListTrailerBinding
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class RecyclerTrailer(
     private val listTrailer: List<Video>,
@@ -26,9 +29,9 @@ class RecyclerTrailer(
 
     override fun onBindViewHolder(holder: ViewHolderHuruf, position: Int) {
         val dataTrailer = listTrailer[position]
-        Glide.with(mContext).load("https://img.youtube.com/vi/vvazj_Ycw_w/0.jpg").into(holder.binding.ivThumbnail)
+        Glide.with(mContext).load("https://img.youtube.com/vi/${dataTrailer.key}/0.jpg").into(holder.binding.ivThumbnail)
         holder.binding.tvTitle.text = dataTrailer.name
-        holder.binding.tvRelease.text = dataTrailer.published_at
+        holder.binding.tvRelease.text = ToolBatch.formatDateFull(dataTrailer.published_at.split("T").first())
 
         holder.binding.root.setOnClickListener { onClickTrailer(dataTrailer.key) }
     }

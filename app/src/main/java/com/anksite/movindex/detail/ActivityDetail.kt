@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anksite.movindex.Cons
 import com.anksite.movindex.DialogCustom
 import com.anksite.movindex.DialogLoading
+import com.anksite.movindex.ToolBatch
 import com.anksite.movindex.api.model.Genre
 import com.anksite.movindex.api.model.ResponseMovie
 import com.anksite.movindex.api.model.ResponseReview
@@ -58,9 +59,9 @@ class ActivityDetail : AppCompatActivity() {
         Glide.with(this).load("https://image.tmdb.org/t/p/w780" + responseMovie.backdropPath)
             .into(b.ivBackdrop)
         b.b.tvGenres.text = getGenres(responseMovie.genres)
-        b.b.tvVoteAvg.text = responseMovie.voteAverage.substring(0,3)
-        b.b.tvVoteCount.text = responseMovie.voteCount.toString()+" votes"
-        b.b.tvReleaseDate.text = formatDate(responseMovie.releaseDate)
+        b.b.tvVoteAvg.text = responseMovie.voteAverage.substring(0, 3)
+        b.b.tvVoteCount.text = responseMovie.voteCount.toString() + " votes"
+        b.b.tvReleaseDate.text = ToolBatch.formatDate(responseMovie.releaseDate)
         b.b.tvRuntime.text = formatRuntime(responseMovie.runtime)
         b.b.tvOverview.text = responseMovie.overview
     }
@@ -68,7 +69,11 @@ class ActivityDetail : AppCompatActivity() {
     fun handleVideo(responseVideo: ResponseVideo) {
         responseCount()
 
-        val mAdapter = RecyclerTrailer(responseVideo.results) { videoId ->
+        var trailer = responseVideo.results.filter { it.type == "Trailer" }
+        trailer = trailer.filter { it.site == "YouTube" }
+        trailer = trailer.filter { it.official }
+
+        val mAdapter = RecyclerTrailer(trailer) { videoId ->
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
@@ -111,27 +116,22 @@ class ActivityDetail : AppCompatActivity() {
         }
     }
 
-    fun formatDate(strDate: String): String {
-        val date = SimpleDateFormat("yyy-MM-dd", Locale.US).parse(strDate)
-        return SimpleDateFormat("MMM dd, yy", Locale.US).format(date)
-    }
-
-    fun getGenres(listGenre: List<Genre>): String{
+    fun getGenres(listGenre: List<Genre>): String {
         var genres = ""
         listGenre.forEach {
-            genres = genres+", "+it.name
+            genres = genres + ", " + it.name
         }
         return genres.substring(2)
     }
 
-    fun formatRuntime(runtime: Int): String{
+    fun formatRuntime(runtime: Int): String {
         var duration = ""
-        if(runtime>=60){
-            val h = runtime/60
-            val m = runtime%60
-            duration = h.toString()+"h "+m.toString()+"m"
+        if (runtime >= 60) {
+            val h = runtime / 60
+            val m = runtime % 60
+            duration = h.toString() + "h " + m.toString() + "m"
         } else {
-            duration = runtime.toString()+"m"
+            duration = runtime.toString() + "m"
         }
 
         return duration
