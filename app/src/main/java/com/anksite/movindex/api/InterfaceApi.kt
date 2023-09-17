@@ -9,8 +9,10 @@ import retrofit2.http.*
 
 interface InterfaceApi {
 
-    @GET("/3/discover/movie?api_key=${BuildConfig.KEY}&page=1")
-    suspend fun discover(): Result<ResponseDiscover>
+    @GET("/3/discover/movie?api_key=${BuildConfig.KEY}")
+    suspend fun discover(
+        @Query("page") page: Int
+    ): Result<ResponseDiscover>
 
     @GET("/3/movie/{id}?api_key=${BuildConfig.KEY}")
     suspend fun movie(

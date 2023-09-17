@@ -40,7 +40,7 @@ class EndpointTest {
         mockResponse.setBody(getJsonFromFile("/discover.json"))
         mockWebServer.enqueue(mockResponse)
 
-        interfaceApi.discover().onSuccess {
+        interfaceApi.discover(1).onSuccess {
             println("Result size: ${it.results.size}")
             assertEquals(true, it.results.isNotEmpty())
         }.onFailure {

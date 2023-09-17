@@ -3,23 +3,21 @@ package com.anksite.movindex.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anksite.movindex.Cons
 import com.anksite.movindex.DialogCustom
 import com.anksite.movindex.DialogLoading
+import com.anksite.movindex.R
 import com.anksite.movindex.ToolBatch
 import com.anksite.movindex.api.model.Genre
 import com.anksite.movindex.api.model.ResponseMovie
 import com.anksite.movindex.api.model.ResponseReview
 import com.anksite.movindex.api.model.ResponseVideo
 import com.anksite.movindex.databinding.ActivityDetailBinding
-import com.anksite.movindex.databinding.LayoutDetailMovieBinding
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 
 class ActivityDetail : AppCompatActivity() {
@@ -57,6 +55,7 @@ class ActivityDetail : AppCompatActivity() {
         b.toolbar.title = responseMovie.title
         b.tvSubtitle.text = responseMovie.tagline
         Glide.with(this).load("https://image.tmdb.org/t/p/w780" + responseMovie.backdropPath)
+            .placeholder(R.drawable.i_movie)
             .into(b.ivBackdrop)
         b.b.tvGenres.text = getGenres(responseMovie.genres)
         b.b.tvVoteAvg.text = responseMovie.voteAverage.substring(0, 3)
@@ -69,35 +68,44 @@ class ActivityDetail : AppCompatActivity() {
     fun handleVideo(responseVideo: ResponseVideo) {
         responseCount()
 
-        var trailer = responseVideo.results.filter { it.type == "Trailer" }
-        trailer = trailer.filter { it.site == "YouTube" }
-        trailer = trailer.filter { it.official }
+        if(responseVideo.results.isEmpty()){
+            b.b.tvTrailer.visibility = View.GONE
+        } else {
+            var trailer = responseVideo.results.filter { it.type == "Trailer" }
+            trailer = trailer.filter { it.site == "YouTube" }
+            trailer = trailer.filter { it.official }
 
-        val mAdapter = RecyclerTrailer(trailer) { videoId ->
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("http://www.youtube.com/watch?v=$videoId")
+            val mAdapter = RecyclerTrailer(trailer) { videoId ->
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("http://www.youtube.com/watch?v=$videoId")
+                    )
                 )
-            )
-        }
+            }
 
-        b.b.rvTrailer.apply {
-            layoutManager = LinearLayoutManager(
-                this@ActivityDetail,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            adapter = mAdapter
+            b.b.rvTrailer.apply {
+                layoutManager = LinearLayoutManager(
+                    this@ActivityDetail,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                adapter = mAdapter
+            }
         }
     }
 
     fun handleReview(responseReview: ResponseReview) {
         responseCount()
-        val mAdapter = RecyclerReview(responseReview.results)
-        b.b.rvReview.apply {
-            layoutManager = LinearLayoutManager(this@ActivityDetail)
-            adapter = mAdapter
+
+        if(responseReview.results.isEmpty()){
+            b.b.tvReview.visibility = View.GONE
+        } else {
+            val mAdapter = RecyclerReview(responseReview.results)
+            b.b.rvReview.apply {
+                layoutManager = LinearLayoutManager(this@ActivityDetail)
+                adapter = mAdapter
+            }
         }
     }
 

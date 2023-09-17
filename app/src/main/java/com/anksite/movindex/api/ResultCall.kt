@@ -1,5 +1,6 @@
 package com.anksite.movindex.api
 
+import android.util.Log
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.Call
@@ -17,6 +18,7 @@ class ResultCall<T>(val delegate: Call<T>) :
         delegate.enqueue(
             object : Callback<T> {
                 override fun onResponse(call: Call<T>, response: Response<T>) {
+                    Log.d(TAG, response.body().toString())
                     if (response.isSuccessful) {
                         if(response.code()==204){
                             //Catch delete response

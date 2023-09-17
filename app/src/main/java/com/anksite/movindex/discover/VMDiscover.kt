@@ -18,9 +18,9 @@ class VMDiscover : ViewModel() {
     private val mError = MutableLiveData<String>()
     val error: LiveData<String> = mError
 
-    fun discover() {
+    fun discover(page: Int) {
         viewModelScope.launch {
-            mApi.discover().onSuccess {
+            mApi.discover(page).onSuccess {
                 mResponseDiscover.postValue(it)
             }.onFailure {
                 val errorMessage = it.localizedMessage
