@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anksite.movindex.Cons
 import com.anksite.movindex.DialogCustom
 import com.anksite.movindex.DialogLoading
+import com.anksite.movindex.api.model.Genre
 import com.anksite.movindex.api.model.ResponseMovie
 import com.anksite.movindex.api.model.ResponseReview
 import com.anksite.movindex.api.model.ResponseVideo
 import com.anksite.movindex.databinding.ActivityDetailBinding
+import com.anksite.movindex.databinding.LayoutDetailMovieBinding
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class ActivityDetail : AppCompatActivity() {
@@ -53,12 +57,12 @@ class ActivityDetail : AppCompatActivity() {
         b.tvSubtitle.text = responseMovie.tagline
         Glide.with(this).load("https://image.tmdb.org/t/p/w780" + responseMovie.backdropPath)
             .into(b.ivBackdrop)
-        b.tvRuntime.text = responseMovie.runtime.toString()
-        b.tvGenres.text = responseMovie.genres.toString()
-        b.tvVoteAvg.text = responseMovie.voteAverage.toString()
-        b.tvVoteCount.text = responseMovie.voteCount.toString()
-        b.tvReleaseDate.text = responseMovie.releaseDate
-        b.tvOverview.text = responseMovie.overview
+        b.b.tvGenres.text = getGenres(responseMovie.genres)
+        b.b.tvVoteAvg.text = responseMovie.voteAverage.substring(0,3)
+        b.b.tvVoteCount.text = responseMovie.voteCount.toString()+" votes"
+        b.b.tvReleaseDate.text = formatDate(responseMovie.releaseDate)
+        b.b.tvRuntime.text = formatRuntime(responseMovie.runtime)
+        b.b.tvOverview.text = responseMovie.overview
     }
 
     fun handleVideo(responseVideo: ResponseVideo) {
@@ -73,7 +77,7 @@ class ActivityDetail : AppCompatActivity() {
             )
         }
 
-        b.rvTrailer.apply {
+        b.b.rvTrailer.apply {
             layoutManager = LinearLayoutManager(
                 this@ActivityDetail,
                 LinearLayoutManager.HORIZONTAL,
@@ -86,7 +90,7 @@ class ActivityDetail : AppCompatActivity() {
     fun handleReview(responseReview: ResponseReview) {
         responseCount()
         val mAdapter = RecyclerReview(responseReview.results)
-        b.rvReview.apply {
+        b.b.rvReview.apply {
             layoutManager = LinearLayoutManager(this@ActivityDetail)
             adapter = mAdapter
         }
@@ -105,6 +109,32 @@ class ActivityDetail : AppCompatActivity() {
         if (mResponseCount == 3) {
             mDialogLoading.cancel()
         }
+    }
+
+    fun formatDate(strDate: String): String {
+        val date = SimpleDateFormat("yyy-MM-dd", Locale.US).parse(strDate)
+        return SimpleDateFormat("MMM dd, yy", Locale.US).format(date)
+    }
+
+    fun getGenres(listGenre: List<Genre>): String{
+        var genres = ""
+        listGenre.forEach {
+            genres = genres+", "+it.name
+        }
+        return genres.substring(2)
+    }
+
+    fun formatRuntime(runtime: Int): String{
+        var duration = ""
+        if(runtime>=60){
+            val h = runtime/60
+            val m = runtime%60
+            duration = h.toString()+"h "+m.toString()+"m"
+        } else {
+            duration = runtime.toString()+"m"
+        }
+
+        return duration
     }
 
 }
