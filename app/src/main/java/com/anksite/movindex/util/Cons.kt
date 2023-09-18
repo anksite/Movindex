@@ -7,5 +7,8 @@ class Cons {
 
         //INTENT
         const val ID = "id://api.themoviedb.org"
+
+        //SHARED PREF
+        const val CACHE_DISCOVER = "cacheDiscover"
     }
 }
