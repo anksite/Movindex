@@ -13,6 +13,7 @@ import com.anksite.movindex.detail.ActivityDetail
 import com.anksite.movindex.util.Cons
 import com.anksite.movindex.util.DialogCustom
 import com.anksite.movindex.util.DialogLoading
+import com.anksite.movindex.util.ToolBatch
 
 class ActivityDiscover : AppCompatActivity() {
 
@@ -27,6 +28,7 @@ class ActivityDiscover : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(b.root)
+        //ToolBatch.EspressoIdlingResource.increment()
 
         b.rvDiscover.apply {
             layoutManager = GridLayoutManager(this@ActivityDiscover, 2)
@@ -45,7 +47,7 @@ class ActivityDiscover : AppCompatActivity() {
         b.pbLoading.visibility = View.GONE
         mTotalPage = response.total_pages
         (b.rvDiscover.adapter as RecyclerDiscover).addList(response.results)
-
+        //ToolBatch.EspressoIdlingResource.decrement()
     }
 
     fun onError(response: String) {
@@ -55,6 +57,7 @@ class ActivityDiscover : AppCompatActivity() {
             .setTitle("Error!")
             .setMessage(response)
             .show()
+        //ToolBatch.EspressoIdlingResource.decrement()
     }
 
     fun onClickMovie(dataMovie: Movie){

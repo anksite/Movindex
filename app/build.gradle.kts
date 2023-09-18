@@ -47,9 +47,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //viewmodel
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
@@ -69,4 +66,12 @@ dependencies {
 
     //tools
     implementation("com.github.marlonlom:timeago:4.0.3")
+
+    //test
+    implementation("androidx.test.espresso:espresso-idling-resource:3.5.1")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+
 }
