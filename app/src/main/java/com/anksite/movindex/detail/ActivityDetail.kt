@@ -91,6 +91,7 @@ class ActivityDetail : AppCompatActivity() {
                     false
                 )
                 adapter = mAdapter
+                ItemSnapHelper().attachToRecyclerView(this)
             }
         }
     }
