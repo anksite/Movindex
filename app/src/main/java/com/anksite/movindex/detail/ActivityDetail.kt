@@ -3,6 +3,7 @@ package com.anksite.movindex.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -59,7 +60,7 @@ class ActivityDetail : AppCompatActivity() {
             .into(b.ivBackdrop)
         b.b.tvGenres.text = getGenres(responseMovie.genres)
         b.b.tvVoteAvg.text = responseMovie.voteAverage.substring(0, 3)
-        b.b.tvVoteCount.text = responseMovie.voteCount.toString() + " votes"
+        b.b.tvVoteCount.text = ToolBatch.formatThousand(responseMovie.voteCount) + " votes"
         b.b.tvReleaseDate.text = ToolBatch.formatDate(responseMovie.releaseDate)
         b.b.tvRuntime.text = formatRuntime(responseMovie.runtime)
         b.b.tvOverview.text = responseMovie.overview
@@ -68,13 +69,13 @@ class ActivityDetail : AppCompatActivity() {
     fun handleVideo(responseVideo: ResponseVideo) {
         responseCount()
 
-        if(responseVideo.results.isEmpty()){
+        var trailer = responseVideo.results.filter { it.type == "Trailer" }
+        trailer = trailer.filter { it.site == "YouTube" }
+        trailer = trailer.filter { it.official }
+
+        if(trailer.isEmpty()){
             b.b.tvTrailer.visibility = View.GONE
         } else {
-            var trailer = responseVideo.results.filter { it.type == "Trailer" }
-            trailer = trailer.filter { it.site == "YouTube" }
-            trailer = trailer.filter { it.official }
-
             val mAdapter = RecyclerTrailer(trailer) { videoId ->
                 startActivity(
                     Intent(
